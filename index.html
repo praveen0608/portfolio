@@ -284,14 +284,26 @@
 </style>
 
 <script>
- 
+    // Dino Game Script
     (function() {
+        const gameContainer = document.querySelector('.game-container');
+
+        // Create Dino element
         const dino = document.createElement('div');
+        dino.classList.add('dino');
+        gameContainer.appendChild(dino);
+
+        // Create Obstacle element
         const obstacle = document.createElement('div');
+        obstacle.classList.add('obstacle');
+        gameContainer.appendChild(obstacle);
+
+        // Score tracking
         const scoreDisplay = document.querySelector('#dino-game .score');
-        let isJumping = false;
         let score = 0;
 
+        // Dino jumping logic
+        let isJumping = false;
         function jump() {
             if (isJumping) return;
             isJumping = true;
@@ -314,6 +326,7 @@
             }, 20);
         }
 
+        // Obstacle movement logic
         function moveObstacle() {
             let obstaclePosition = 600;
             const obstacleSpeed = 10;
@@ -328,6 +341,7 @@
                     obstacle.style.right = obstaclePosition + 'px';
                 }
 
+                // Collision detection
                 let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
                 if (obstaclePosition > 550 && obstaclePosition < 590 && dinoBottom <= 50) {
                     alert(`Game Over! Your score: ${score}`);
@@ -337,13 +351,15 @@
             }, 20);
         }
 
+        // Start obstacle movement
+        moveObstacle();
+
+        // Event listener for jumping
         document.addEventListener('keydown', event => {
             if (event.code === 'Space' || event.code === 'ArrowUp') jump();
         });
-
-        moveObstacle();
     })();
-</script>	
+</script>
 
     <!-- footer -->
     <div class="container">
