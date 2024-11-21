@@ -10,50 +10,6 @@
     <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
     <!-- Bootstrap + Meyawo main styles -->
 	<link rel="stylesheet" href="assets/css/meyawo.css">
-	  <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            overflow: hidden;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background-color: #f7f7f7;
-        }
-        .game-container {
-            position: relative;
-            width: 600px;
-            height: 200px;
-            border: 2px solid #333;
-            overflow: hidden;
-            background-color: #fff;
-        }
-        .dino {
-            position: absolute;
-            bottom: 20px;
-            left: 50px;
-            width: 40px;
-            height: 40px;
-            background-color: #333;
-            border-radius: 4px;
-        }
-        .obstacle {
-            position: absolute;
-            bottom: 20px;
-            right: 0;
-            width: 30px;
-            height: 30px;
-            background-color: red;
-        }
-        .score {
-            position: absolute;
-            top: 10px;
-            left: 10px;
-            font-size: 18px;
-            color: #333;
-        }
-    </style>
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
 
@@ -296,77 +252,7 @@
     <!-- Meyawo js -->
     <script src="assets/js/meyawo.js"></script>
 
-    <div class="game-container">
-        <div class="score">Score: 0</div>
-        <div class="dino"></div>
-        <div class="obstacle"></div>
-    </div>
 
-    <script>
-        const dino = document.querySelector('.dino');
-        const obstacle = document.querySelector('.obstacle');
-        const scoreDisplay = document.querySelector('.score');
-        let isJumping = false;
-        let score = 0;
-
-        // Dino Jump
-        function jump() {
-            if (isJumping) return;
-            isJumping = true;
-
-            let upInterval = setInterval(() => {
-                let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if (dinoBottom >= 150) {
-                    clearInterval(upInterval);
-                    let downInterval = setInterval(() => {
-                        if (dinoBottom <= 20) {
-                            clearInterval(downInterval);
-                            isJumping = false;
-                        }
-                        dinoBottom -= 10;
-                        dino.style.bottom = dinoBottom + 'px';
-                    }, 20);
-                }
-                dinoBottom += 10;
-                dino.style.bottom = dinoBottom + 'px';
-            }, 20);
-        }
-
-        // Move Obstacle
-        function moveObstacle() {
-            let obstaclePosition = 600; // Starting position
-            const obstacleSpeed = 10; // Adjust speed
-
-            const obstacleInterval = setInterval(() => {
-                if (obstaclePosition <= -30) {
-                    obstaclePosition = 600; // Reset position
-                    score++;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                } else {
-                    obstaclePosition -= obstacleSpeed;
-                    obstacle.style.right = obstaclePosition + 'px';
-                }
-
-                // Check for collision
-                let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if (obstaclePosition > 550 && obstaclePosition < 590 && dinoBottom <= 50) {
-                    alert(`Game Over! Your score: ${score}`);
-                    clearInterval(obstacleInterval);
-                    location.reload(); // Restart the game
-                }
-            }, 20);
-        }
-
-        // Start Game
-        moveObstacle();
-
-        // Listen for Jump
-        document.addEventListener('keydown', event => {
-            if (event.code === 'Space' || event.code === 'ArrowUp') {
-                jump();
-            }
-        });
-    </script>	
 
 </body>
 </html>
