@@ -235,7 +235,7 @@
             </div> <!-- end of container -->
         </section> <!-- end of section -->
 	
-   <section id="dino-game" class="section text-center" style="margin-top: 50px;">
+<section id="dino-game" class="section text-center" style="margin-top: 50px;">
     <h6 class="section-title" style="color: #9991d8;">Mini Dino Game</h6>
     <div class="game-container">
         <div class="score">Score: 0</div>
@@ -313,6 +313,18 @@
         let upperObstacleEnabled = false;
         let obstacle1Interval, obstacle3Interval;
 
+        function resetGame() {
+            clearInterval(obstacle1Interval);
+            clearInterval(obstacle3Interval);
+            isGameStarted = false;
+            upperObstacleEnabled = false;
+            score = 0;
+            gameSpeed = 20;
+            scoreDisplay.textContent = `Score: ${score}`;
+            obstacle1.style.left = '600px';
+            obstacle3.style.left = '1000px';
+        }
+
         function jump() {
             if (isJumping) return;
             isJumping = true;
@@ -360,8 +372,10 @@
 
                 if (obstaclePosition <= -30) {
                     obstaclePosition = initialPosition;
-                    score++;
-                    scoreDisplay.textContent = `Score: ${score}`;
+                    if (obstacle.classList.contains('obstacle1') || upperObstacleEnabled) {
+                        score++;
+                        scoreDisplay.textContent = `Score: ${score}`;
+                    }
                     if (score % 10 === 0 && gameSpeed > 5) {
                         gameSpeed -= 2;
                         clearInterval(intervalHolder);
@@ -380,10 +394,7 @@
                 localStorage.setItem('highScore', highScore);
                 highScoreDisplay.textContent = `High Score: ${highScore}`;
             }
-            score = 0;
-            scoreDisplay.textContent = `Score: ${score}`;
-            isGameStarted = false;
-            upperObstacleEnabled = false;
+            resetGame();
         }
 
         function startGame() {
@@ -411,7 +422,7 @@
         });
     })();
 </script>
-	
+
     <!-- footer -->
     <div class="container">
         <footer class="footer">       
