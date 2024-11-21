@@ -11207,10 +11207,10 @@ p {
   text-align: center;
   visibility: hidden;
   opacity: 0;
-  background-image: -webkit-linear-gradient(bottom, #e1dfed 0%, rgba(225, 223, 237, 0.7) 99%, rgba(225, 223, 237, 0.8) 100%);
-  background-image: linear-gradient(to top, #e1dfed 0%, rgba(225, 223, 237, 0.7) 99%, rgba(225, 223, 237, 0.8) 100%);
-  -webkit-transition: all, 0.3s;
-  transition: all, 0.3s;
+  background-image: -webkit-linear-gradient(bottom, #800080 0%, rgba(128, 0, 128, 0.7) 99%, rgba(128, 0, 128, 0.8) 100%);
+  background-image: linear-gradient(to top, #800080 0%, rgba(128, 0, 128, 0.7) 99%, rgba(128, 0, 128, 0.8) 100%);
+  -webkit-transition: all 0.3s;
+  transition: all 0.3s;
   width: 0;
   height: 0;
   border-radius: 50%;
@@ -11241,6 +11241,7 @@ p {
   width: 100%;
   height: 100%;
   border-radius: 0;
+  background-color: #800080; /* Added purple background color */
 }
 
 @media (max-width: 767.98px) {
