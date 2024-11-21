@@ -279,7 +279,7 @@
         left: 600px;
     }
     .obstacle3 {
-        top: 50px;  /* Adjusted to be below score and highscore */
+        top: 150px;  /* Adjusted height to match maximum jump */
         left: 1000px;
     }
     .score, .highscore {
@@ -310,14 +310,12 @@
         let isJumping = false;
         let gameSpeed = 20;
         let isGameStarted = false;
-        let upperObstacleEnabled = false;
         let obstacle1Interval, obstacle3Interval;
 
         function resetGame() {
             clearInterval(obstacle1Interval);
             clearInterval(obstacle3Interval);
             isGameStarted = false;
-            upperObstacleEnabled = false;
             score = 0;
             gameSpeed = 20;
             scoreDisplay.textContent = `Score: ${score}`;
@@ -361,7 +359,7 @@
                     if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) {
                         gameOver();
                     }
-                } else if (obstacle.classList.contains('obstacle3') && upperObstacleEnabled) {
+                } else if (obstacle.classList.contains('obstacle3')) {
                     if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom >= 120) {
                         gameOver();
                     }
@@ -375,8 +373,11 @@
                         gameSpeed -= 2;
                         clearInterval(obstacle1Interval);
                         clearInterval(obstacle3Interval);
-                        obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
-                        obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                        if (score >= 20) {
+                            obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                        } else {
+                            obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
+                        }
                     }
                 }
             }, speed);
@@ -395,9 +396,10 @@
         function startGame() {
             if (!isGameStarted) {
                 isGameStarted = true;
-                upperObstacleEnabled = score >= 20;
                 obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
-                obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                if (score >= 20) {
+                    obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                }
             }
             jump();
         }
@@ -415,7 +417,7 @@
         });
     })();
 </script>	
-
+	
     <!-- footer -->
     <div class="container">
         <footer class="footer">       
