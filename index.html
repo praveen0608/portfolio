@@ -235,13 +235,15 @@
             </div> <!-- end of container -->
         </section> <!-- end of section -->
 
-  <section id="dino-game" class="section text-center" style="margin-top: 50px;">
-    <h6 class="section-title" style="color: #9991d8;">Mini Dino Game</h6>
+ <section id="dino-game" class="section text-center" style="margin-top: 50px;">
+    <h6 class="section-title" style="color: #9991d8;">Blocky Box Run</h6>
     <div class="game-container">
         <div class="score">Score: 0</div>
         <div class="highscore">High Score: 0</div>
         <div class="dino"></div>
-        <div class="obstacle"></div>
+        <div class="obstacle obstacle1"></div>
+        <div class="obstacle obstacle2"></div>
+        <div class="obstacle obstacle3"></div>
     </div>
 </section>
 
@@ -251,7 +253,7 @@
         margin: 20px auto;
         width: 100%;
         max-width: 600px;
-        height: 200px;
+        height: 300px;
         border: 2px solid #9991d8;
         background-color: #f7f7f7;
         overflow: hidden;
@@ -268,12 +270,22 @@
     }
     .obstacle {
         position: absolute;
-        bottom: 20px;
-        right: 0;
         width: 30px;
         height: 30px;
         background-color: red;
         border-radius: 4px;
+    }
+    .obstacle1 {
+        bottom: 20px;
+        right: 0;
+    }
+    .obstacle2 {
+        bottom: 20px;
+        right: -200px;
+    }
+    .obstacle3 {
+        top: -30px;
+        right: -400px;
     }
     .score, .highscore {
         position: absolute;
@@ -293,7 +305,9 @@
     (function() {
         const gameContainer = document.querySelector('.game-container');
         const dino = document.querySelector('.dino');
-        const obstacle = document.querySelector('.obstacle');
+        const obstacle1 = document.querySelector('.obstacle1');
+        const obstacle2 = document.querySelector('.obstacle2');
+        const obstacle3 = document.querySelector('.obstacle3');
         const scoreDisplay = document.querySelector('.score');
         const highScoreDisplay = document.querySelector('.highscore');
         let score = 0;
@@ -326,7 +340,7 @@
             }, 20);
         }
 
-        function moveObstacle() {
+        function moveObstacle(obstacle, speed) {
             let obstaclePosition = 600;
             const obstacleInterval = setInterval(() => {
                 if (!isGameStarted) return;
@@ -335,7 +349,7 @@
                 obstacle.style.left = `${obstaclePosition}px`;
 
                 const dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) {
+                if (obstaclePosition < 90 && obstaclePosition > 50 && (dinoBottom <= 50 || obstacle.style.top === '0px')) {
                     alert(`Game Over! Your score: ${score}`);
                     clearInterval(obstacleInterval);
                     if (score > highScore) {
@@ -356,16 +370,18 @@
                     if (score % 20 === 0 && gameSpeed > 5) {
                         gameSpeed -= 2;
                         clearInterval(obstacleInterval);
-                        moveObstacle();
+                        moveObstacle(obstacle, gameSpeed);
                     }
                 }
-            }, gameSpeed);
+            }, speed);
         }
 
         function startGame() {
             if (!isGameStarted) {
                 isGameStarted = true;
-                moveObstacle();
+                moveObstacle(obstacle1, gameSpeed);
+                moveObstacle(obstacle2, gameSpeed + 10);
+                moveObstacle(obstacle3, gameSpeed + 20);
             }
             jump();
         }
@@ -383,8 +399,7 @@
         });
     })();
 </script>
-
-  
+ 
     <!-- footer -->
     <div class="container">
         <footer class="footer">       
