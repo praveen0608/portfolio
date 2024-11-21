@@ -234,7 +234,7 @@
                 </div> <!-- end of row -->
             </div> <!-- end of container -->
         </section> <!-- end of section -->
-	
+
 <section id="dino-game" class="section text-center" style="margin-top: 50px;">
     <h6 class="section-title" style="color: #9991d8;">Mini Box Run</h6>
     <div class="game-container">
@@ -276,11 +276,11 @@
     }
     .obstacle1 {
         bottom: 20px;
-        right: 0;
+        left: 600px;
     }
     .obstacle3 {
-        top: -30px;
-        right: 0;
+        top: 50px;  /* Adjusted to be below score and highscore */
+        left: 1000px;
     }
     .score, .highscore {
         position: absolute;
@@ -322,8 +322,7 @@
             gameSpeed = 20;
             scoreDisplay.textContent = `Score: ${score}`;
             obstacle1.style.left = '600px';
-            obstacle3.style.left = '800px';
-            obstacle3.style.top = '-30px';
+            obstacle3.style.left = '1000px';
         }
 
         function jump() {
@@ -415,8 +414,7 @@
             startGame();
         });
     })();
-</script>
-
+</script>	
 
     <!-- footer -->
     <div class="container">
