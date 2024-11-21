@@ -210,10 +210,10 @@
                 <div class="row align-items-center">
                     <div class="col-sm offset-md-1 mb-4 mb-md-0">
                         <h6 class="title text-light">Want to work with me?</h6>
-                        <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
+                        <p class="m-0 text-light">Always feel Free to Contact </p>
                     </div>
                     <div class="col-sm offset-sm-2 offset-md-3">
-                        <button class="btn btn-lg my-font btn-light rounded" id="hire-me-btn" onclick="showPhoneNumber()">Hire Me</button>
+                        <button class="btn btn-lg my-font btn-light rounded" id="hire-me-btn" onclick="showPhoneNumber()">Want to Reach Me? Click Here!</button>
     
     <script>
         // Function to show phone number and email when button is clicked
@@ -322,7 +322,7 @@
             gameSpeed = 20;
             scoreDisplay.textContent = `Score: ${score}`;
             obstacle1.style.left = '600px';
-            obstacle3.style.left = '1000px';
+            obstacle3.style.left = '800px';
             obstacle3.style.top = '-30px';
         }
 
@@ -349,9 +349,9 @@
             }, 20);
         }
 
-        function moveObstacle(obstacle, speed, initialPosition, intervalHolder) {
+        function moveObstacle(obstacle, speed, initialPosition) {
             let obstaclePosition = initialPosition;
-            intervalHolder = setInterval(() => {
+            return setInterval(() => {
                 if (!isGameStarted) return;
 
                 obstaclePosition -= 10;
@@ -365,22 +365,19 @@
                 } else if (obstacle.classList.contains('obstacle3') && upperObstacleEnabled) {
                     if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom >= 120) {
                         gameOver();
-                    } else if (obstaclePosition < 50) {
-                        score++;
-                        scoreDisplay.textContent = `Score: ${score}`;
                     }
                 }
 
                 if (obstaclePosition <= -30) {
                     obstaclePosition = initialPosition;
-                    if (obstacle.classList.contains('obstacle1') || upperObstacleEnabled) {
-                        score++;
-                        scoreDisplay.textContent = `Score: ${score}`;
-                    }
+                    score++;
+                    scoreDisplay.textContent = `Score: ${score}`;
                     if (score % 10 === 0 && gameSpeed > 5) {
                         gameSpeed -= 2;
-                        clearInterval(intervalHolder);
-                        moveObstacle(obstacle, gameSpeed, initialPosition, intervalHolder);
+                        clearInterval(obstacle1Interval);
+                        clearInterval(obstacle3Interval);
+                        obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
+                        obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
                     }
                 }
             }, speed);
@@ -399,11 +396,9 @@
         function startGame() {
             if (!isGameStarted) {
                 isGameStarted = true;
-                moveObstacle(obstacle1, gameSpeed, 600, obstacle1Interval);
-                setTimeout(() => {
-                    upperObstacleEnabled = true;
-                    moveObstacle(obstacle3, gameSpeed + 10, 800, obstacle3Interval);
-                }, 20000);
+                upperObstacleEnabled = score >= 20;
+                obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
+                obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
             }
             jump();
         }
@@ -421,6 +416,7 @@
         });
     })();
 </script>
+
 
     <!-- footer -->
     <div class="container">
