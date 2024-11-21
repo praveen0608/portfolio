@@ -56,7 +56,7 @@
         <button class="btn btn-primary" id="scroll-to-about">Dive Into My Portfolio</button>
 
         <div class="button-container">
-            <button id="scroll-to-game" class="fancy-button">Lets Play</button>
+            <button id="scroll-to-game" class="fancy-button">Let's Play</button>
         </div>
 
         <script>
@@ -66,6 +66,9 @@
             document.getElementById('scroll-to-game').addEventListener('click', function () {
                 document.getElementById('dino-game').scrollIntoView({ behavior: 'smooth' });
                 document.getElementById('scroll-to-game').style.display = 'none';
+                setTimeout(() => {
+                    document.getElementById('scroll-to-game').style.display = 'block';
+                }, 1000); // Reappear after 1 second (adjust timing if needed)
             });
         </script>
     </div>              
@@ -82,7 +85,7 @@
     .fancy-button {
         background-color: white;
         border: 2px solid #9991d8;
-        color: #9991d8;
+        color: #4b0082; /* Darker purple color */
         padding: 10px 20px;
         font-size: 20px;
         font-weight: bold;
@@ -92,9 +95,8 @@
         animation: pop 1s infinite;
         writing-mode: vertical-rl;
         height: 150px; /* Increased vertical height */
+        width: 60px; /* Reduced width */
         line-height: 1.5;
-        font-weight: bold;
-        color: darkpurple; /* Make font dark purple */
     }
     .fancy-button:hover {
         transform: scale(1.1);
@@ -108,6 +110,7 @@
         }
     }
 </style>
+
 
     <!-- about section -->
     <section class="section pt-0" id="about">
