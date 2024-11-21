@@ -287,77 +287,65 @@
     // Dino Game Script
     (function() {
         const gameContainer = document.querySelector('.game-container');
-
-        // Create Dino element
-        const dino = document.createElement('div');
-        dino.classList.add('dino');
-        gameContainer.appendChild(dino);
-
-        // Create Obstacle element
-        const obstacle = document.createElement('div');
-        obstacle.classList.add('obstacle');
-        gameContainer.appendChild(obstacle);
-
-        // Score tracking
-        const scoreDisplay = document.querySelector('#dino-game .score');
+        const dino = document.querySelector('.dino');
+        const obstacle = document.querySelector('.obstacle');
+        const scoreDisplay = document.querySelector('.score');
         let score = 0;
-
-        // Dino jumping logic
         let isJumping = false;
+
         function jump() {
             if (isJumping) return;
             isJumping = true;
 
-            let upInterval = setInterval(() => {
-                let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if (dinoBottom >= 150) {
+            let position = 20;
+            const upInterval = setInterval(() => {
+                if (position >= 150) {
                     clearInterval(upInterval);
-                    let downInterval = setInterval(() => {
-                        if (dinoBottom <= 20) {
+                    const downInterval = setInterval(() => {
+                        if (position <= 20) {
                             clearInterval(downInterval);
                             isJumping = false;
                         }
-                        dinoBottom -= 10;
-                        dino.style.bottom = dinoBottom + 'px';
+                        position -= 10;
+                        dino.style.bottom = `${position}px`;
                     }, 20);
+                } else {
+                    position += 10;
+                    dino.style.bottom = `${position}px`;
                 }
-                dinoBottom += 10;
-                dino.style.bottom = dinoBottom + 'px';
             }, 20);
         }
 
-        // Obstacle movement logic
         function moveObstacle() {
             let obstaclePosition = 600;
-            const obstacleSpeed = 10;
-
             const obstacleInterval = setInterval(() => {
-                if (obstaclePosition <= -30) {
-                    obstaclePosition = 600;
-                    score++;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                } else {
-                    obstaclePosition -= obstacleSpeed;
-                    obstacle.style.right = obstaclePosition + 'px';
-                }
+                obstaclePosition -= 10;
+                obstacle.style.right = `${600 - obstaclePosition}px`;
 
                 // Collision detection
-                let dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
+                const dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
                 if (obstaclePosition > 550 && obstaclePosition < 590 && dinoBottom <= 50) {
                     alert(`Game Over! Your score: ${score}`);
                     clearInterval(obstacleInterval);
                     location.reload();
                 }
+
+                // Reset obstacle and increment score
+                if (obstaclePosition <= -30) {
+                    obstaclePosition = 600;
+                    score++;
+                    scoreDisplay.textContent = `Score: ${score}`;
+                }
             }, 20);
         }
 
-        // Start obstacle movement
-        moveObstacle();
-
-        // Event listener for jumping
-        document.addEventListener('keydown', event => {
-            if (event.code === 'Space' || event.code === 'ArrowUp') jump();
+        document.addEventListener('keydown', (event) => {
+            if (event.code === 'Space' || event.code === 'ArrowUp') {
+                jump();
+            }
         });
+
+        moveObstacle();
     })();
 </script>
 
