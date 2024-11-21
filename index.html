@@ -234,15 +234,14 @@
                 </div> <!-- end of row -->
             </div> <!-- end of container -->
         </section> <!-- end of section -->
-
-	<section id="dino-game" class="section text-center" style="margin-top: 50px;">
+	
+   <section id="dino-game" class="section text-center" style="margin-top: 50px;">
     <h6 class="section-title" style="color: #9991d8;">Mini Dino Game</h6>
     <div class="game-container">
         <div class="score">Score: 0</div>
         <div class="highscore">High Score: 0</div>
         <div class="dino"></div>
         <div class="obstacle obstacle1"></div>
-        <div class="obstacle obstacle2"></div>
         <div class="obstacle obstacle3"></div>
     </div>
 </section>
@@ -279,10 +278,6 @@
         bottom: 20px;
         right: 0;
     }
-    .obstacle2 {
-        bottom: 20px;
-        right: -200px;
-    }
     .obstacle3 {
         top: -30px;
         right: -400px;
@@ -306,7 +301,6 @@
         const gameContainer = document.querySelector('.game-container');
         const dino = document.querySelector('.dino');
         const obstacle1 = document.querySelector('.obstacle1');
-        const obstacle2 = document.querySelector('.obstacle2');
         const obstacle3 = document.querySelector('.obstacle3');
         const scoreDisplay = document.querySelector('.score');
         const highScoreDisplay = document.querySelector('.highscore');
@@ -316,6 +310,8 @@
         let isJumping = false;
         let gameSpeed = 20;
         let isGameStarted = false;
+        let upperObstacleEnabled = false;
+        let obstacle1Interval, obstacle3Interval;
 
         function jump() {
             if (isJumping) return;
@@ -340,49 +336,64 @@
             }, 20);
         }
 
-        function moveObstacle(obstacle, speed, initialPosition) {
+        function moveObstacle(obstacle, speed, initialPosition, intervalHolder) {
             let obstaclePosition = initialPosition;
-            const obstacleInterval = setInterval(() => {
+            intervalHolder = setInterval(() => {
                 if (!isGameStarted) return;
 
                 obstaclePosition -= 10;
                 obstacle.style.left = `${obstaclePosition}px`;
 
                 const dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if ((obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) || 
-                    (obstacle.classList.contains('obstacle3') && obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom >= 250)) {
-                    alert(`Game Over! Your score: ${score}`);
-                    clearInterval(obstacleInterval);
-                    if (score > highScore) {
-                        highScore = score;
-                        localStorage.setItem('highScore', highScore);
-                        highScoreDisplay.textContent = `High Score: ${highScore}`;
+                if (obstacle.classList.contains('obstacle1')) {
+                    if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) {
+                        gameOver();
                     }
-                    score = 0;
-                    scoreDisplay.textContent = `Score: ${score}`;
-                    isGameStarted = false;
-                    obstaclePosition = initialPosition;
+                } else if (obstacle.classList.contains('obstacle3') && upperObstacleEnabled) {
+                    if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom >= 200) {
+                        gameOver();
+                    } else if (obstaclePosition < 50) {
+                        score++;
+                        scoreDisplay.textContent = `Score: ${score}`;
+                    }
                 }
 
                 if (obstaclePosition <= -30) {
                     obstaclePosition = initialPosition;
                     score++;
                     scoreDisplay.textContent = `Score: ${score}`;
-                    if (score % 20 === 0 && gameSpeed > 5) {
+                    if (score % 10 === 0 && gameSpeed > 5) {
                         gameSpeed -= 2;
-                        clearInterval(obstacleInterval);
-                        moveObstacle(obstacle, gameSpeed, initialPosition);
+                        clearInterval(intervalHolder);
+                        moveObstacle(obstacle, gameSpeed, initialPosition, intervalHolder);
                     }
                 }
             }, speed);
         }
 
+        function gameOver() {
+            alert(`Game Over! Your score: ${score}`);
+            clearInterval(obstacle1Interval);
+            clearInterval(obstacle3Interval);
+            if (score > highScore) {
+                highScore = score;
+                localStorage.setItem('highScore', highScore);
+                highScoreDisplay.textContent = `High Score: ${highScore}`;
+            }
+            score = 0;
+            scoreDisplay.textContent = `Score: ${score}`;
+            isGameStarted = false;
+            upperObstacleEnabled = false;
+        }
+
         function startGame() {
             if (!isGameStarted) {
                 isGameStarted = true;
-                moveObstacle(obstacle1, gameSpeed, 600);
-                moveObstacle(obstacle2, gameSpeed + 10, 800);
-                moveObstacle(obstacle3, gameSpeed + 20, 1000);
+                moveObstacle(obstacle1, gameSpeed, 600, obstacle1Interval);
+                if (score >= 20) {
+                    upperObstacleEnabled = true;
+                    moveObstacle(obstacle3, gameSpeed + 20, 1000, obstacle3Interval);
+                }
             }
             jump();
         }
@@ -400,7 +411,7 @@
         });
     })();
 </script>
-
+	
     <!-- footer -->
     <div class="container">
         <footer class="footer">       
