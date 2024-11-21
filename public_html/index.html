@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Start your development with Meyawo landing page.">
+    <meta name="author" content="Devcrud">
+    <title>Praveen's Portfolio | Free Bootstrap 4.3.x landing page</title>
+    <!-- font icons -->
+    <link rel="stylesheet" href="assets/vendors/themify-icons/css/themify-icons.css">
+    <!-- Bootstrap + Meyawo main styles -->
+	<link rel="stylesheet" href="assets/css/meyawo.css">
+</head>
+<body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+
+    <!-- Page Navbar -->
+    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+        <div class="container">
+            <a class="logo" href="#">Keep Going !</a>         
+            <ul class="nav">
+                <li class="item">
+                    <a class="link" href="#home">Home</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#about">About</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#portfolio">Skills</a>
+                </li>
+                
+                <li class="item">
+                    <a class="link" href="#blog">Blog</a>
+                </li>
+                <li class="item">
+                    <a class="link" href="#con">Contact</a>
+                </li>
+            </ul>
+            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+                <div class="hamburger-box">
+                  <div class="hamburger-inner"></div>
+                </div>
+            </a>
+        </div>          
+    </nav><!-- End of Page Navbar -->
+
+    <!-- page header -->
+    <header id="home" class="header">
+        <div class="overlay"></div>
+        <div class="header-content container">
+            <h1 class="header-title">
+                <span class="up">HI!</span>
+                <span class="down">I am </span>
+                <span class="down">Praveen&nbspKumar </span>
+            </h1>
+            <p class="header-subtitle">SAP BASIS CONSULTANT</p>      
+            
+        
+            <button class="btn btn-primary" id="scroll-to-about">Dive Into My Portfolio</button>
+
+            <script>
+                document.getElementById('scroll-to-about').addEventListener('click', function () {
+                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+                });
+            </script>
+            
+        </div>              
+    </header><!-- end of page header -->
+
+    <!-- about section -->
+    <section class="section pt-0" id="about">
+        <!-- container -->
+        <div class="container text-center">
+            <!-- about wrapper -->
+            <div class="about">
+                <div class="about-img-holder">
+                    <img src="assets/imgs/Praveen.png" class="about-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                </div>
+                <div class="about-caption">
+                    <p class="section-subtitle">Who Am I ?</p>
+                    <h2 class="section-title mb-3">About Me</h2>
+                    <p>
+                        Passionate and self-driven IT professional with expertise in SAP Technologies.<br>My core competencies encompass SAP BASIS, HANA & BTP administration<br>including S/4 HANA implementation, Migration, Upgrade and AMS projects.
+                    </p>
+                    
+                    <button class="btn-rounded btn btn-outline-primary mt-4" id="download-cv">Quick Resume View</button>
+
+                     <script>
+                        document.getElementById('download-cv').addEventListener('click', function() {
+                        window.location.href = 'assets/files/PRAVEEN_CV.pdf'; 
+                         });
+                     </script>
+                    
+                </div>              
+            </div><!-- end of about wrapper -->
+        </div><!-- end of container -->
+    </section> <!-- end of about section -->
+
+    <!-- portfolio section -->
+    <section class="section" id="portfolio">
+        <div class="container text-center">
+            <p class="section-subtitle">What do I work on ?</p>
+            <h6 class="section-title mb-6">Skills and Expertise</h6>
+            <!-- row -->
+             
+            <div class="row">
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img src="assets/imgs/sap.png" class="portfolio-card-img" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">    
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>SAP BASIS</h5>
+                                <p class="font-weight-normal">Managed and maintained the technical foundation of SAP systems, ensuring optimal performance and reliability.
+                                    Performed system installations, upgrades, and performance tuning to support business operations.
+                                    Handled user administration, security, and troubleshooting to ensure smooth SAP operations and minimize downtime.</p>
+                            </span>                         
+                        </span>                     
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img class="portfolio-card-img" src="assets/imgs/btp.png" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>SAP BTP</h5>
+                                <p class="font-weight-normal">Administered and maintained SAP BTP landscapes, ensuring seamless integration and performance across applications.
+                                    Configured new services, managed entitlements, and handled user roles and security for cloud and hybrid environments.
+                                    Monitored system health, performed updates, and resolved issues to optimize platform reliability.</p>
+                            </span>                         
+                        </span>                         
+                    </a>
+                </div>
+                <div class="col-md-4">
+                    <a href="#" class="portfolio-card">
+                        <img class="portfolio-card-img" src="assets/imgs/aws.svg" class="img-responsive rounded" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page">    
+                        <span class="portfolio-card-overlay">
+                            <span class="portfolio-card-caption">
+                                <h4>AWS</h5>
+                                <p class="font-weight-normal">Managed AWS cloud infrastructure for SAP BASIS operations, including EC2 instances, S3 storage, and RDS databases, ensuring high availability and scalability.
+                                    Performed regular backups, security configurations, and system monitoring to maintain optimal performance and compliance.
+                                    Continuously explored advanced AWS services to enhance expertise and improve SAP system deployments.</p>
+                            </span>                         
+                        </span>                     
+                    </a>
+                </div>
+            </div><!-- end of row -->
+        </div><!-- end of container -->
+    </section> <!-- end of portfolio section -->
+
+
+    <!-- service section -->
+    <section class="section" id="service">
+        <div class="container text-center">
+            <h6 class="section-title" style="margin-bottom: 0;">My Life in Action</h6>
+            <p class="section-subtitle" style="margin-top: 0; margin-bottom: 2em;">Work Play Thrive</p>
+            <div class="row justify-content-center">
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/lap.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Work</h6>
+                            <p class="subtitle">Constantly seeking to learn and expand my skillset, I strive to enhance my expertise and stay ahead in an ever-evolving world.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/soccer.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Football</h6>
+                            <p class="subtitle">Fueling my passion: Football <br> my lifelong companion, keeps me grounded and inspired.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/gym.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Fitness</h6>
+                            <p class="subtitle">A lifelong pursuit: Embracing fitness, one step at a time, towards a healthier, happier me.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-lg-3">
+                    <div class="service-card">
+                        <div class="body">
+                            <img src="assets/imgs/cam.svg" alt="Download free bootstrap 4 landing page, free boootstrap 4 templates, Download free bootstrap 4.1 landing page, free boootstrap 4.1.1 templates, meyawo Landing page" class="icon">
+                            <h6 class="title">Photography</h6>
+                            <p class="subtitle">Capturing moments, cherishing memories.</p>
+                        </div>
+                    </div>
+                </div>
+            </div><!-- end of row -->
+        </div>
+    </section><!-- end of service section -->
+    
+    <!-- blog section -->
+    <section class="section" id="blog">
+        <!-- container -->
+        <div class="container text-center">
+            <p class="section-subtitle">Recent Posts?</p>
+            <h6 class="section-title mb-6">Blog</h6>
+            <h6 class="section-title mb-6">In Progress</h6>
+        </div><!-- end of container -->
+    </section><!-- end of blog section -->
+
+        <!-- section -->
+        <section class="section-sm bg-primary" id ='con'>
+            <!-- container -->
+            <div class="container text-center text-sm-left">
+                <!-- row -->
+                <div class="row align-items-center">
+                    <div class="col-sm offset-md-1 mb-4 mb-md-0">
+                        <h6 class="title text-light">Want to work with me?</h6>
+                        <p class="m-0 text-light">Always feel Free to Contact & Hire me</p>
+                    </div>
+                    <div class="col-sm offset-sm-2 offset-md-3">
+                        <button class="btn btn-lg my-font btn-light rounded" id="hire-me-btn" onclick="showPhoneNumber()">Hire Me</button>
+    
+    <script>
+        // Function to show phone number and email when button is clicked
+        function showPhoneNumber() {
+            const button = document.getElementById('hire-me-btn');
+            button.innerHTML = '+91 8681923178 <br> iampraveen6898@gmail.com';
+        }
+    
+        // Function to reset the button text when scrolling down
+        window.addEventListener('scroll', function() {
+            const button = document.getElementById('hire-me-btn');
+            if (window.scrollY > 100) {  // You can adjust this value based on when you want to reset
+                button.innerHTML = 'Hire Me';
+            }
+        });
+    </script>
+                    </div>
+                </div> <!-- end of row -->
+            </div> <!-- end of container -->
+        </section> <!-- end of section -->
+
+    <!-- footer -->
+    <div class="container">
+        <footer class="footer">       
+            <p class="mb-0">Copyright <script>document.write(new Date().getFullYear())</script> &copy; Praveen Kumar</p>
+        </footer>
+    </div> <!-- end of page footer -->
+	
+	<!-- core  -->
+    <script src="assets/vendors/jquery/jquery-3.4.1.js"></script>
+    <script src="assets/vendors/bootstrap/bootstrap.bundle.js"></script>
+
+    <!-- bootstrap 3 affix -->
+	<script src="assets/vendors/bootstrap/bootstrap.affix.js"></script>
+
+    <!-- Meyawo js -->
+    <script src="assets/js/meyawo.js"></script>
+
+</body>
+</html>
