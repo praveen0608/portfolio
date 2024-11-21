@@ -296,7 +296,8 @@
         const scoreDisplay = document.querySelector('.score');
         const highScoreDisplay = document.querySelector('.highscore');
         let score = 0;
-        let highScore = 0;
+        let highScore = localStorage.getItem('highScore') || 0;
+        highScoreDisplay.textContent = `High Score: ${highScore}`;
         let isJumping = false;
         let gameSpeed = 20;
         let isGameStarted = false;
@@ -338,33 +339,29 @@
                     clearInterval(obstacleInterval);
                     if (score > highScore) {
                         highScore = score;
+                        localStorage.setItem('highScore', highScore);
                         highScoreDisplay.textContent = `High Score: ${highScore}`;
                     }
                     score = 0;
                     scoreDisplay.textContent = `Score: ${score}`;
-                    location.reload();
+                    isGameStarted = false;
+                    obstaclePosition = 600;
                 }
 
                 if (obstaclePosition <= -30) {
                     obstaclePosition = 600;
                     score++;
                     scoreDisplay.textContent = `Score: ${score}`;
-                    if (gameSpeed > 5) gameSpeed -= 1;
+                    if (score % 20 === 0 && gameSpeed > 5) {
+                        gameSpeed -= 2;
+                        clearInterval(obstacleInterval);
+                        moveObstacle();
+                    }
                 }
             }, gameSpeed);
         }
 
-        document.addEventListener('keydown', (event) => {
-            if (event.code === 'Space' || event.code === 'ArrowUp') {
-                if (!isGameStarted) {
-                    isGameStarted = true;
-                    moveObstacle();
-                }
-                jump();
-            }
-        });
-
-        document.addEventListener('touchstart', (event) => {
+        gameContainer.addEventListener('click', () => {
             if (!isGameStarted) {
                 isGameStarted = true;
                 moveObstacle();
@@ -373,12 +370,15 @@
         });
 
         gameContainer.addEventListener('touchstart', (event) => {
-            const touch = event.touches[0];
-            if (touch.clientY < window.innerHeight / 2) jump();
+            event.preventDefault();
+            if (!isGameStarted) {
+                isGameStarted = true;
+                moveObstacle();
+            }
+            jump();
         });
     })();
 </script>
-
 
     <!-- footer -->
     <div class="container">
