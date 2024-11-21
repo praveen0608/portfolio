@@ -12,7 +12,8 @@
 	<link rel="stylesheet" href="assets/css/meyawo.css">
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
-<!-- Page Navbar -->
+
+	<!-- Page Navbar -->
 <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
     <div class="container">
         <a class="logo" href="#">Keep Going !</a>         
@@ -55,7 +56,7 @@
         <button class="btn btn-primary" id="scroll-to-about">Dive Into My Portfolio</button>
 
         <div class="button-container">
-            <button id="scroll-to-game" class="fancy-button">Play Game</button>
+            <button id="dino-game" class="fancy-button">Lets Play</button>
         </div>
 
         <script>
@@ -64,6 +65,7 @@
             });
             document.getElementById('scroll-to-game').addEventListener('click', function () {
                 document.getElementById('dino-game').scrollIntoView({ behavior: 'smooth' });
+                document.getElementById('scroll-to-game').style.display = 'none';
             });
         </script>
     </div>              
@@ -88,11 +90,16 @@
         color: #9991d8;
         padding: 10px 20px;
         font-size: 20px;
+        font-weight: bold;
         border-radius: 10px;
         cursor: pointer;
         transition: transform 0.3s;
         animation: pop 1s infinite;
         writing-mode: vertical-rl;
+        height: 150px; /* Increased vertical height */
+        line-height: 1.5;
+        font-weight: bold;
+        color: darkpurple; /* Make font dark purple */
     }
     .fancy-button:hover {
         transform: scale(1.1);
