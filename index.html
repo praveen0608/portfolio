@@ -235,8 +235,8 @@
             </div> <!-- end of container -->
         </section> <!-- end of section -->
 
- <section id="dino-game" class="section text-center" style="margin-top: 50px;">
-    <h6 class="section-title" style="color: #9991d8;">Blocky Box Run</h6>
+<section id="dino-game" class="section text-center" style="margin-top: 50px;">
+    <h6 class="section-title" style="color: #9991d8;">Mini Dino Game</h6>
     <div class="game-container">
         <div class="score">Score: 0</div>
         <div class="highscore">High Score: 0</div>
@@ -340,8 +340,8 @@
             }, 20);
         }
 
-        function moveObstacle(obstacle, speed) {
-            let obstaclePosition = 600;
+        function moveObstacle(obstacle, speed, initialPosition) {
+            let obstaclePosition = initialPosition;
             const obstacleInterval = setInterval(() => {
                 if (!isGameStarted) return;
 
@@ -349,7 +349,8 @@
                 obstacle.style.left = `${obstaclePosition}px`;
 
                 const dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
-                if (obstaclePosition < 90 && obstaclePosition > 50 && (dinoBottom <= 50 || obstacle.style.top === '0px')) {
+                if ((obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) || 
+                    (obstacle.classList.contains('obstacle3') && obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom >= 250)) {
                     alert(`Game Over! Your score: ${score}`);
                     clearInterval(obstacleInterval);
                     if (score > highScore) {
@@ -360,17 +361,17 @@
                     score = 0;
                     scoreDisplay.textContent = `Score: ${score}`;
                     isGameStarted = false;
-                    obstaclePosition = 600;
+                    obstaclePosition = initialPosition;
                 }
 
                 if (obstaclePosition <= -30) {
-                    obstaclePosition = 600;
+                    obstaclePosition = initialPosition;
                     score++;
                     scoreDisplay.textContent = `Score: ${score}`;
                     if (score % 20 === 0 && gameSpeed > 5) {
                         gameSpeed -= 2;
                         clearInterval(obstacleInterval);
-                        moveObstacle(obstacle, gameSpeed);
+                        moveObstacle(obstacle, gameSpeed, initialPosition);
                     }
                 }
             }, speed);
@@ -379,9 +380,9 @@
         function startGame() {
             if (!isGameStarted) {
                 isGameStarted = true;
-                moveObstacle(obstacle1, gameSpeed);
-                moveObstacle(obstacle2, gameSpeed + 10);
-                moveObstacle(obstacle3, gameSpeed + 20);
+                moveObstacle(obstacle1, gameSpeed, 600);
+                moveObstacle(obstacle2, gameSpeed + 10, 800);
+                moveObstacle(obstacle3, gameSpeed + 20, 1000);
             }
             jump();
         }
