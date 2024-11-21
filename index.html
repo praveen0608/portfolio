@@ -12,58 +12,100 @@
 	<link rel="stylesheet" href="assets/css/meyawo.css">
 </head>
 <body data-spy="scroll" data-target=".navbar" data-offset="40" id="home">
+<!-- Page Navbar -->
+<nav class="custom-navbar" data-spy="affix" data-offset-top="20">
+    <div class="container">
+        <a class="logo" href="#">Keep Going !</a>         
+        <ul class="nav">
+            <li class="item">
+                <a class="link" href="#home">Home</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#about">About</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#portfolio">Skills</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#blog">Blog</a>
+            </li>
+            <li class="item">
+                <a class="link" href="#con">Contact</a>
+            </li>
+        </ul>
+        <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
+            <div class="hamburger-box">
+                <div class="hamburger-inner"></div>
+            </div>
+        </a>
+    </div>          
+</nav><!-- End of Page Navbar -->
 
-    <!-- Page Navbar -->
-    <nav class="custom-navbar" data-spy="affix" data-offset-top="20">
-        <div class="container">
-            <a class="logo" href="#">Keep Going !</a>         
-            <ul class="nav">
-                <li class="item">
-                    <a class="link" href="#home">Home</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#about">About</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#portfolio">Skills</a>
-                </li>
-                
-                <li class="item">
-                    <a class="link" href="#blog">Blog</a>
-                </li>
-                <li class="item">
-                    <a class="link" href="#con">Contact</a>
-                </li>
-            </ul>
-            <a href="javascript:void(0)" id="nav-toggle" class="hamburger hamburger--elastic">
-                <div class="hamburger-box">
-                  <div class="hamburger-inner"></div>
-                </div>
-            </a>
-        </div>          
-    </nav><!-- End of Page Navbar -->
+<!-- Page Header -->
+<header id="home" class="header">
+    <div class="overlay"></div>
+    <div class="header-content container">
+        <h1 class="header-title">
+            <span class="up">HI!</span>
+            <span class="down">I am </span>
+            <span class="down">Praveen&nbspKumar </span>
+        </h1>
+        <p class="header-subtitle display-4">SAP BASIS CONSULTANT</p>
+        
+        <button class="btn btn-primary" id="scroll-to-about">Dive Into My Portfolio</button>
 
-    <!-- page header -->
-    <header id="home" class="header">
-        <div class="overlay"></div>
-        <div class="header-content container">
-            <h1 class="header-title">
-                <span class="up">HI!</span>
-                <span class="down">I am </span>
-                <span class="down">Praveen&nbspKumar </span>
-            </h1>
-          <p class="header-subtitle display-4">SAP BASIS CONSULTANT</p>
-            
-            <button class="btn btn-primary" id="scroll-to-about">Dive Into My Portfolio</button>
+        <div class="button-container">
+            <button id="scroll-to-game" class="fancy-button">Play Game</button>
+        </div>
 
-            <script>
-                document.getElementById('scroll-to-about').addEventListener('click', function () {
-                    document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
-                });
-            </script>
-            
-        </div>              
-    </header><!-- end of page header -->
+        <script>
+            document.getElementById('scroll-to-about').addEventListener('click', function () {
+                document.getElementById('about').scrollIntoView({ behavior: 'smooth' });
+            });
+            document.getElementById('scroll-to-game').addEventListener('click', function () {
+                document.getElementById('dino-game').scrollIntoView({ behavior: 'smooth' });
+            });
+        </script>
+    </div>              
+</header><!-- end of page header -->
+
+<!-- Existing Game Section -->
+<section id="dino-game" class="section text-center" style="margin-top: 50px;">
+    <!-- Your existing game code here -->
+</section>
+
+<style>
+    .button-container {
+        position: fixed;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        z-index: 1000;
+    }
+    .fancy-button {
+        background-color: white;
+        border: 2px solid #9991d8;
+        color: #9991d8;
+        padding: 10px 20px;
+        font-size: 20px;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: transform 0.3s;
+        animation: pop 1s infinite;
+        writing-mode: vertical-rl;
+    }
+    .fancy-button:hover {
+        transform: scale(1.1);
+    }
+    @keyframes pop {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+</style>
 
     <!-- about section -->
     <section class="section pt-0" id="about">
@@ -374,7 +416,12 @@
                         clearInterval(obstacle1Interval);
                         clearInterval(obstacle3Interval);
                         if (score >= 20) {
-                            obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                            const randomObstacle = Math.random() < 0.5 ? obstacle1 : obstacle3;
+                            if (randomObstacle.classList.contains('obstacle1')) {
+                                obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
+                            } else {
+                                obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                            }
                         } else {
                             obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
                         }
@@ -398,7 +445,12 @@
                 isGameStarted = true;
                 obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
                 if (score >= 20) {
-                    obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                    const randomObstacle = Math.random() < 0.5 ? obstacle1 : obstacle3;
+                    if (randomObstacle.classList.contains('obstacle1')) {
+                        obstacle1Interval = moveObstacle(obstacle1, gameSpeed, 600);
+                    } else {
+                        obstacle3Interval = moveObstacle(obstacle3, gameSpeed + 10, 800);
+                    }
                 }
             }
             jump();
@@ -416,7 +468,7 @@
             startGame();
         });
     })();
-</script>	
+</script>
 	
     <!-- footer -->
     <div class="container">
