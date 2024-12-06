@@ -322,7 +322,7 @@
                 let gameSpeed = 20;
                 let isGameStarted = false;
                 let obstacle1Interval, obstacle3Interval;
-        
+            
                 function resetGame() {
                     clearInterval(obstacle1Interval);
                     clearInterval(obstacle3Interval);
@@ -333,11 +333,11 @@
                     obstacle1.style.left = '600px';
                     obstacle3.style.left = '1000px';
                 }
-        
+            
                 function jump() {
                     if (isJumping) return;
                     isJumping = true;
-        
+            
                     let position = 20;
                     const upInterval = setInterval(() => {
                         if (position >= 150) {
@@ -356,15 +356,15 @@
                         }
                     }, 20);
                 }
-        
+            
                 function moveObstacle(obstacle, speed, initialPosition) {
                     let obstaclePosition = initialPosition;
                     return setInterval(() => {
                         if (!isGameStarted) return;
-        
+            
                         obstaclePosition -= 10;
                         obstacle.style.left = `${obstaclePosition}px`;
-        
+            
                         const dinoBottom = parseInt(window.getComputedStyle(dino).getPropertyValue('bottom'));
                         if (obstacle.classList.contains('obstacle1')) {
                             if (obstaclePosition < 90 && obstaclePosition > 50 && dinoBottom <= 50) {
@@ -375,7 +375,7 @@
                                 gameOver();
                             }
                         }
-        
+            
                         if (obstaclePosition <= -30) {
                             obstaclePosition = initialPosition;
                             score++;
@@ -398,7 +398,7 @@
                         }
                     }, speed);
                 }
-        
+            
                 function gameOver() {
                     alert(`Game Over! Your score: ${score}`);
                     if (score > highScore) {
@@ -408,7 +408,7 @@
                     }
                     resetGame();
                 }
-        
+            
                 function startGame() {
                     if (!isGameStarted) {
                         isGameStarted = true;
@@ -424,28 +424,26 @@
                     }
                     jump();
                 }
-        
-                // Ensure the game only starts if the game container is focused
+            
                 gameContainer.addEventListener('keydown', (event) => {
                     if ((event.code === 'Space' || event.code === 'ArrowUp') && document.activeElement === gameContainer) {
                         startGame();
                     }
                 });
-        
+            
                 gameContainer.addEventListener('click', () => {
                     gameContainer.focus();
                 });
-        
+            
                 gameContainer.addEventListener('touchstart', (event) => {
                     event.preventDefault();
                     gameContainer.focus();
                     startGame();
                 });
-        
-                gameContainer.focus();
             })();
-        </script>
-        
+            </script>
+            
+
         <style>
             /* General Styling */
             .chat-btn {
@@ -669,7 +667,6 @@
         document.getElementById('chat-container').style.display = 'none';
     });
 </script>
-
 
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
         <script>
