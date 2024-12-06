@@ -307,6 +307,7 @@
             </div>
         </section>
         
+        
         <script>
             (function() {
                 const gameContainer = document.querySelector('.game-container');
@@ -398,16 +399,49 @@
                         }
                     }, speed);
                 }
-            
-                function gameOver() {
-                    alert(`Game Over! Your score: ${score}`);
-                    if (score > highScore) {
-                        highScore = score;
-                        localStorage.setItem('highScore', highScore);
-                        highScoreDisplay.textContent = `High Score: ${highScore}`;
-                    }
-                    resetGame();
-                }
+                
+
+function gameOver() {
+    const existingAlert = document.getElementById('game-over-alert');
+    if (existingAlert) existingAlert.remove();
+    
+    const alertDiv = document.createElement('div');
+    alertDiv.id = 'game-over-alert';
+    alertDiv.style.position = 'fixed';
+    alertDiv.style.top = '10px';
+    alertDiv.style.left = '50%';
+    alertDiv.style.transform = 'translateX(-50%)';
+    alertDiv.style.backgroundColor = '#e5e4f7';
+    alertDiv.style.border = '2px solid #6e68a0 ';
+    alertDiv.style.color = '#6a0dad';
+    alertDiv.style.padding = '15px';
+    alertDiv.style.borderRadius = '10px';
+    alertDiv.style.boxShadow = '0 4px 8px rgba(0, 0, 0, 0.1)';
+    alertDiv.style.zIndex = '1000';
+    alertDiv.style.fontFamily = 'Arial, sans-serif';
+    alertDiv.style.fontSize = '16px';
+    alertDiv.style.textAlign = 'center';
+    alertDiv.style.transition = 'opacity 0.3s ease-out';
+    alertDiv.innerHTML = `
+        <strong>Game Over!</strong><br>
+        Your score: ${score}<br>
+        High Score: ${score > highScore ? score : highScore}
+    `;
+
+    document.body.appendChild(alertDiv);
+
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem('highScore', highScore);
+        highScoreDisplay.textContent = `High Score: ${highScore}`;
+    }
+
+    setTimeout(() => alertDiv.style.opacity = '0', 2700);
+    setTimeout(() => alertDiv.remove(), 3000);
+
+    resetGame();
+}
+
             
                 function startGame() {
                     if (!isGameStarted) {
@@ -442,6 +476,57 @@
                 });
             })();
             </script>
+
+<style>
+    .game-container {
+        position: relative;
+        margin: 20px auto;
+        width: 100%;
+        max-width: 600px;
+        height: 300px;
+        border: 6px solid #9991d8;
+        background-color: #e5e4f7;
+        overflow: hidden;
+        border-radius: 10px;
+    }
+    .dino {
+        position: absolute;
+        bottom: 20px;
+        left: 50px;
+        width: 40px;
+        height: 40px;
+        background-color: #9991d8;
+        border-radius: 4px;
+    }
+    .obstacle {
+        position: absolute;
+        width: 30px;
+        height: 30px;
+        background-color: red;
+        border-radius: 4px;
+    }
+    .obstacle1 {
+        bottom: 20px;
+        left: 600px;
+    }
+    .obstacle3 {
+        top: 150px;
+        left: 1000px;
+    }
+    .score, .highscore {
+        position: absolute;
+        top: 10px;
+        font-size: 18px;
+        color: #333;
+    }
+    .score {
+        left: 10px;
+    }
+    .highscore {
+        right: 10px;
+    }
+</style>
+
             
 
         <style>
